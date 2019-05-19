@@ -13,8 +13,8 @@ does not have an end to the game except for when user runs out of lives.
          * Update commenting with Sphinx software
      
   Changes planned in the future:
-    - Fix hit box detection
-    - Add variety in levels such as
+    * Fix hit box detection
+    * Add variety in levels such as
           Plane starting locations, number of planes, add additional planes(Red), add a 'Boss' level with specific firing patterns, 
           additional quality of life changes.
           
