@@ -10,7 +10,6 @@ does not have an end to the game except for when user runs out of lives.
 
      * Change space bar as continue on death/victory screen
      * Clean up main to become easier to read/ debug
-        * Hello
      * Update commenting with Sphinx software
      
   #### Changes planned in the future:
