@@ -1,14 +1,12 @@
-# 1942 python using pygame Created by Van Seiler and Ashley Hogg for CS 399 spring 2019.
+# 1942 python using pygame Created by Van Seiler for CS 399 spring 2019.
 # Game is a vertical scrolling plane fighter game based off the old cabinet arcade game 1942. This version features
-# 2 small ship types, silver and green, 1 medium, and 1 large. Boss level probably won't be done for this assignment
+# 2 small ship types, silver and green, 1 medium, and 1 large
 import pygame, sys, math, random
 from pygame.locals import *
 from pygameSettings import *
 pygame.init()
 hSize = 700
 vSize = 800
-
-# lotta messy code, sorry
 
 
 window = pygame.display.set_mode((hSize, vSize), 0, 32)
@@ -17,7 +15,7 @@ gameFont = pygame.font.Font('ArcadeFont.ttf', 20)
 
 
 # https://stackoverflow.com/questions/25221036/pygame-music-pause-unpause-toggle
-# For pausing the music, mostly because it is annoying af after 2 seconds.
+# For pausing the music, mostly because it is annoying after .1 seconds.
 # idea is getting the state of the music track (playing or paused) and will either play or pause it depending on
 # whether it's true or false
 class Pause(object):
@@ -587,7 +585,7 @@ def reset(background_group, bg):
 
 
 # in case some ships/rockets are still alive on death/level end, they will still be there on return, so safer to just
-# delete all of them and restart again
+# delete all of them and restart again. Pretty dumb way to do it though
 def resetShips(greenList, silverList, mediumList, largeList, spriteList, mrl, lrl, srl, r):
     for sg in greenList:
         sg.delete(spriteList, greenList)
@@ -607,8 +605,9 @@ def resetShips(greenList, silverList, mediumList, largeList, spriteList, mrl, lr
         rocket.delete(spriteList, r)
 
 
+# First goal is to clean up main
 # messy function that is in charge of making all ships, rockets, and a bunch of other stuff. too many variables are used
-#
+
 def main():
     global itr, run, dummy, alt, gameOn, totalScore, level, fires, hits, misses, destroyed, counter #bunch of globals
     alt = 1
