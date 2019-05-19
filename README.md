@@ -8,7 +8,7 @@ Ver. 1.0 features 2 different small planes, 1 medium plane and 1 large plane. Ea
 does not have an end to the game except for when user runs out of lives.  
   Planned changes for ver 1.1:
 
-Markup : * Change space bar as continue on death/victory screen
+         * Change space bar as continue on death/victory screen
          * Clean up main to become easier to read/ debug
          * Update commenting with Sphinx software
      
