@@ -391,18 +391,18 @@ def calculate(enemyx, enemyy, playerx, playery):
 # Carrier: indicates beginning and end of level
 # island: decorative
 # ocean: fill in space
-# all three are stored in an array and called to when they are needed. I JUST REALIZED I DIDN'T NEED TO DO THAT. oh well
+# all three are stored in an array and called to when they are needed.
 # when a new background is created eg. bgi its y location is on top of the previous background image
 def bgstitch():
 
-    im = [] # list of images
+    
     bg = [] # the total "stitched" image
 
     # Currently the Three images being used, an Island, the carrier and plain old ocean
     CA = pygame.image.load('CarrierBG.png').convert_alpha()
     OC = pygame.image.load('OceanBG.png').convert_alpha()
     IS = pygame.image.load('IslandBG.png').convert_alpha()
-    im.append(CA), im.append(OC), im.append(IS)
+    
 
     # Coordinates, make things look cleaner
     x = hSize//2
@@ -413,19 +413,17 @@ def bgstitch():
     for i in range(0, 8):
         # Values of i indicate what picture is being used, carrier first and last, two islands, water inbetween
         if i == 0 or i == 6:
-            bgi = Background(im[0], x, y//2-(i*y))
-            bg.append(bgi)
+            bg.append(Background(CA, x, y//2-(i*y)))
         elif i == 1 or i == 3 or i == 5:
-            bgi = Background(im[1], x, y//2-(i*y))
-            bg.append(bgi)
+            bg.append(Background(OC, x, y//2-(i*y)))
         elif i == 2 or i == 4:
-            bgi = Background(im[2], x, y // 2 - (i * y))
+            bgi = Background(IS, x, y // 2 - (i * y))
             # To create a little variety, flip the image of one of the islands to make it look "different"
             if i == 4:
                 bgi.image = pygame.transform.flip(bgi.image, True, False)
             bg.append(bgi)
 
-    return bg  # return this array of images so that it can be moved in another function
+    return bg  
 
 
 # Taking in the group of background images put together from bgstich\
@@ -469,12 +467,12 @@ def mainMenu(logo,PAUSE):
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     PAUSE.toggle()
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_ENTER:
                     gameOn = True
                     return False
 
 
-        text = gameFont.render("Press SPACE to Begin", True, WHITE, BLACK)
+        text = gameFont.render("Press Enter to Begin", True, WHITE, BLACK)
         textRect = text.get_rect()
         textRect.center= hSize//2,vSize//2
 
@@ -504,10 +502,7 @@ def score(lives):
 
 # end level stats, specific to that level.
 # will be called on both death and end of level, reset when move to next level
-# Spacebar will continue game regardless of if player has died or not, so pass in a value of dead to tell if player
-# is alive or not
-#   if dead, stay on same level
-#   if not, go to next level
+# Enter will continue game dead determines if player will restart on the same level, or go to next
 def levelstats(PAUSE, background_group, bg, dead):
     text = []
     textRect = []
@@ -521,7 +516,6 @@ def levelstats(PAUSE, background_group, bg, dead):
 
     avg= math.floor(avg)  # floor value to get percent
 
-    # change all values to string so they can be concated in a few seconds
     totalScore, fires, hits, misses, destroyed, avg, level = str(totalScore), str(fires), str(hits), str(misses), \
                                                              str(destroyed), str(avg), str(level)
     for event in pygame.event.get():
@@ -529,19 +523,16 @@ def levelstats(PAUSE, background_group, bg, dead):
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYUP:
-            # Can still mute
             if event.key == pygame.K_m:
                 PAUSE.toggle()
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_ENTER:
                 gameOn = True
                 reset(background_group, bg)
                 level = int(level)
                 if dead == 0:
                     level += 1
-                elif dead == 1:
-                    level=level
-                dead = 0
                 return dead
+            
     if dead == 1:
         text.append(gameFont.render("Ship destroyed Try again?", True, WHITE))
 
@@ -553,7 +544,7 @@ def levelstats(PAUSE, background_group, bg, dead):
     text.append(gameFont.render("Misses        "+misses+"", True, WHITE))
     text.append(gameFont.render("Destroyed     "+destroyed+"", True, WHITE))
     text.append(gameFont.render("Percent hit   "+avg+"", True, WHITE))
-    text.append(gameFont.render("Press SPACE to continue", True, WHITE))
+    text.append(gameFont.render("Press Enter to continue", True, WHITE))
 
     # easier to just make an array of all the text lines above
     for i in range(0, len(text)):
@@ -562,7 +553,6 @@ def levelstats(PAUSE, background_group, bg, dead):
 
     background_group.draw(window) # Background goes first, not moving but will still be where level ended or death spot
 
-    # "print" all lines above onto the screen
     for i in range(0, len(text)):
         window.blit(text[i], textRect[i])
     # return all values to integers to they can be modified
@@ -580,7 +570,7 @@ def reset(background_group, bg):
 
     counter, fires, hits, misses, destroyed = 0, 0, 0, 0 ,0
     background_group.remove(bg)
-    bg = bgstitch()  # Call the function make the new background
+    bg = bgstitch() 
     background_group.add(bg)
 
 
@@ -613,7 +603,7 @@ def main():
     alt = 1
     timer = pygame.time.Clock()
     dummy = 0
-    r = []  # Rocket list, and smallgreen ship list
+    r = []  # Rocket list
     srl = []  # small plane  rocket list
     mrl = []  # medium plane rocket list
     lrl = []  # large plane rocket list
@@ -624,10 +614,10 @@ def main():
     level, totalScore= 1, 0
     hits, misses, fires, destroyed = 0, 0, 0, 0  # all global to take keep track of stats, will reset every level
     dead = 0 # alive on 0, dead on 1
-    rocketImg, enemyRocket, player, greenS, silverS, greenM, greenL, logo = spriteImages() # all the images used
-    # returned from spriteImages
+    rocketImg, enemyRocket, player, greenS, silverS, greenM, greenL, logo = spriteImages()
+   
 
-    run = False # used to indicate that a small green ship launched a missile, true means one is still alive
+    run = False #for rocket launching
     ship = playerPlane(player, hSize // 2, vSize, 0, 0, 3)
 
     bg = bgstitch() # Call the function to stitch all images together and get the array into bg
@@ -666,11 +656,11 @@ def main():
                     if event.key == pygame.K_m:
                         PAUSE.toggle()
 
-            # loop through and user rockets launched and call movement function
+            # loop through user rockets launched and call movement function
             for rocket in r:
                 rocket.launch(r, all_sprites_list)
 
-            # statement to determine how often a plane will launch
+            # determines how often a plane will launch
             if counter % 100 == 1 and counter >= 100 and counter <= 2000:
                 greenList, all_sprites_list= makeSmallPlane(greenS,greenList, all_sprites_list)
             if counter % 60 == 0 and counter >= 100 and counter <= 2000:
