@@ -467,12 +467,12 @@ def mainMenu(logo,PAUSE):
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_m:
                     PAUSE.toggle()
-                if event.key == pygame.K_ENTER:
+                if event.key == pygame.K_RETURN:
                     gameOn = True
                     return False
 
 
-        text = gameFont.render("Press Enter to Begin", True, WHITE, BLACK)
+        text = gameFont.render("Press Return to Begin", True, WHITE, BLACK)
         textRect = text.get_rect()
         textRect.center= hSize//2,vSize//2
 
@@ -525,7 +525,7 @@ def levelstats(PAUSE, background_group, bg, dead):
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_m:
                 PAUSE.toggle()
-            if event.key == pygame.K_ENTER:
+            if event.key == pygame.K_RETURN:
                 gameOn = True
                 reset(background_group, bg)
                 level = int(level)
