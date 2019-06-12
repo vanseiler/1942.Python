@@ -516,8 +516,8 @@ def levelstats(PAUSE, background_group, bg, dead):
 
     avg= math.floor(avg)  # floor value to get percent
 
-    totalScore, fires, hits, misses, destroyed, avg, level = str(totalScore), str(fires), str(hits), str(misses), \
-                                                             str(destroyed), str(avg), str(level)
+    totalScore, fires, hits, misses, destroyed, avg = str(totalScore), str(fires), str(hits), str(misses), \
+                                                             str(destroyed), str(avg)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -531,10 +531,13 @@ def levelstats(PAUSE, background_group, bg, dead):
                 level = int(level)
                 if dead == 0:
                     level += 1
+                dead = 0
                 return dead
             
     if dead == 1:
         text.append(gameFont.render("Ship destroyed Try again?", True, WHITE))
+    
+    level = str(level)
 
     # Stats
     text.append(gameFont.render("Level "+level+" Stats", True, WHITE))
