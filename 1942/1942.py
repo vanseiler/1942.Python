@@ -4,30 +4,14 @@
 import pygame, sys, math, random
 from pygame.locals import *
 from pygameSettings import *
+
 pygame.init()
 hSize = 700
 vSize = 800
 
-
 window = pygame.display.set_mode((hSize, vSize), 0, 32)
 pygame.display.set_caption("1942")
 gameFont = pygame.font.Font('ArcadeFont.ttf', 20)
-
-
-# https://stackoverflow.com/questions/25221036/pygame-music-pause-unpause-toggle
-# For pausing the music, mostly because it is annoying after .1 seconds.
-# idea is getting the state of the music track (playing or paused) and will either play or pause it depending on
-# whether it's true or false
-class Pause(object):
-    def __init__(self):
-        self.paused = pygame.mixer.music.get_busy()
-
-    def toggle(self):
-        if self.paused:
-            pygame.mixer.music.unpause()
-        if not self.paused:
-            pygame.mixer.music.pause()
-        self.paused = not self.paused
 
 
 # Player ship class, defines what happens to the ship
@@ -45,7 +29,7 @@ class playerPlane(pygame.sprite.Sprite):
 
     def movement(self):
         keys = pygame.key.get_pressed()
-        if keys[ K_a]:
+        if keys[K_a]:
             self.rect.centerx -= 5
         elif keys[K_d]:
             self.rect.centerx += 5
@@ -81,13 +65,13 @@ class playerPlane(pygame.sprite.Sprite):
 class Rockets(pygame.sprite.Sprite):
     def __init__(self, imgFile, xStart, yStart, yspeed):
         super().__init__()
-        self.image = pygame.transform.scale(imgFile, (25,25 ))
+        self.image = pygame.transform.scale(imgFile, (25, 25))
         self.rect = self.image.get_rect(center=(xStart, yStart))
-        self.xStart, self.yStart, self.xspeed, self.yspeed = xStart, yStart,0 , yspeed
+        self.xStart, self.yStart, self.xspeed, self.yspeed = xStart, yStart, 0, yspeed
 
     # When function called, the only thing changing is the y value of the object
     def launch(self, rocketlist, spriteList):
-        global misses # used to calculate accuacy
+        global misses  # used to calculate accuacy
         self.rect.centery -= self.yspeed
         # When the rocket hits the top of screen delete it from both rocket list and sprite list
         if self.rect.bottom <= 0:
@@ -129,13 +113,14 @@ class Enemyrocket(pygame.sprite.Sprite):
     def mlaunch(self, spritelist, rl, dx, dy):
         self.rect.centerx += dx
         self.rect.centery += dy
-        if self.rect.left >= hSize or self.rect.right <=0  or self.rect.top >= vSize or self.rect.bottom <= 0:
+        if self.rect.left >= hSize or self.rect.right <= 0 or self.rect.top >= vSize or self.rect.bottom <= 0:
             self.delete(spritelist, rl)
 
     def collide(self, object):
-        collision = pygame.sprite.collide_rect(self,object)
+        collision = pygame.sprite.collide_rect(self, object)
         if collision:
             return True
+
     def delete(self, spriteList, rl):
         spriteList.remove(self)
         rl.remove(self)
@@ -152,11 +137,12 @@ class Enemyrocket(pygame.sprite.Sprite):
 # Delete is used when other functions need to delete the ai plane, i.e. player shoots it down
 class SmallPlane(pygame.sprite.Sprite):
 
-    def __init__(self, imgFile, xStart, yStart, xspeed, yspeed, retreat, fire, dummy):
+    def __init__(self, imgFile, xStart, yStart, xspeed, yspeed, retreat, fire, dummy, health):
         super().__init__()
-        self.image = pygame.transform.scale(imgFile, (60, 60 ))
+        self.image = pygame.transform.scale(imgFile, (60, 60))
         self.rect = self.image.get_rect(center=(xStart, yStart))
-        self.xStart, self.yStart, self.xspeed, self.yspeed, self.retreat, self.fire, self.dummy = xStart, yStart, xspeed, yspeed, retreat, fire, dummy
+        self.xStart, self.yStart, self.xspeed, self.yspeed, self.retreat, self.fire, self.dummy, self.health =\
+            xStart, yStart, xspeed, yspeed, retreat, fire, dummy, health
 
     # Basic movement for green small green plane, Basic idea is that it will dive towards the player, at the last second
     # it will flip around and launch a bomb towards player plane at one position( no tracking). Use of dummy variable
@@ -170,7 +156,7 @@ class SmallPlane(pygame.sprite.Sprite):
         if self.retreat:
             if self.dummy == 1:
                 self.image = pygame.transform.rotate(self.image, 180)
-                self.dummy+=1
+                self.dummy += 1
             self.rect.centerx -= 1
             self.rect.centery -= 5
             if self.fire:
@@ -179,7 +165,7 @@ class SmallPlane(pygame.sprite.Sprite):
 
         # Diving algorithm isn't perfect, path is a little funky, but it does its job
         elif self.retreat == False:
-            dx,dy = calculate(self.rect.centerx, self.rect.centery, sx, sy)
+            dx, dy = calculate(self.rect.centerx, self.rect.centery, sx, sy)
             if dx < 2:
                 dx *= 2
             if dy < 4:
@@ -194,13 +180,13 @@ class SmallPlane(pygame.sprite.Sprite):
     # accounts for both silver and green, so when a ship reaches the edge it is done for, user gets no points
     def boundary(self, spritelist, shiplist):
         if self.rect.bottom < 0:
-            self.delete(shiplist,spritelist)
-        elif self.rect.top>vSize:
-            self.delete(shiplist,spritelist)
-        if self.rect.left>hSize:
-            self.delete(shiplist,spritelist)
-        elif self.rect.right<0:
-            self.delete(shiplist,spritelist)
+            self.delete(shiplist, spritelist)
+        elif self.rect.top > vSize:
+            self.delete(shiplist, spritelist)
+        if self.rect.left > hSize:
+            self.delete(shiplist, spritelist)
+        elif self.rect.right < 0:
+            self.delete(shiplist, spritelist)
 
     def delete(self, shiplist, spriteList):
         shiplist.remove(self)
@@ -219,49 +205,49 @@ class MediumPlane(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.transform.scale(imgFile, (90, 90))
         self.rect = self.image.get_rect(center=(xStart, yStart))
-        self.xStart, self.yStart, self.xspeed, self.yspeed, self.phase, self.itr, self.fire, self.health= \
+        self.xStart, self.yStart, self.xspeed, self.yspeed, self.phase, self.itr, self.fire, self.health = \
             xStart, yStart, xspeed, yspeed, phase, itr, fire, health
 
     def flyGreen(self):
         if self.itr == 6:
-            self.fire= False
+            self.fire = False
             self.phase = 4
-            self.fire= True
-            self.itr+=1
+            self.fire = True
+            self.itr += 1
             return self.fire
-        if self.phase==0:
+        if self.phase == 0:
             self.rect.centery += self.yspeed
-            if self.rect.centery >= 3*vSize//5:
-                self.phase=1
+            if self.rect.centery >= 3 * vSize // 5:
+                self.phase = 1
                 self.itr += 1
-                self.fire= True
+                self.fire = True
                 return self.fire
-        elif self.phase==1:
-            self.fire=False
+        elif self.phase == 1:
+            self.fire = False
             self.rect.centerx -= self.xspeed
-            if self.rect.centerx <= hSize//4:
-                self.phase=2
+            if self.rect.centerx <= hSize // 4:
+                self.phase = 2
                 self.itr += 1
                 self.fire = True
                 return self.fire
-        elif self.phase==2:
-            self.fire=False
+        elif self.phase == 2:
+            self.fire = False
             self.rect.centery -= self.yspeed
-            if self.rect.centery <= vSize//4:
-                self.phase=3
+            if self.rect.centery <= vSize // 4:
+                self.phase = 3
                 self.itr += 1
                 self.fire = True
                 return self.fire
-        elif self.phase==3:
+        elif self.phase == 3:
             self.fire = False
             self.rect.centerx += self.xspeed
-            if self.rect.centerx >= 8*hSize//10:
-                self.phase=0
+            if self.rect.centerx >= 8 * hSize // 10:
+                self.phase = 0
                 self.itr += 1
                 self.fire = True
                 return self.fire
-        elif self.phase==4:
-            self.fire= False
+        elif self.phase == 4:
+            self.fire = False
             self.rect.centery -= self.yspeed
 
     def boundry(self, spritelist, shiplist):
@@ -294,20 +280,20 @@ class LargePlane(pygame.sprite.Sprite):
 
         if self.phase == 0:
             self.rect.centery -= self.yspeed
-            if self.rect.centery <= vSize//2.5:
+            if self.rect.centery <= vSize // 2.5:
                 self.phase = 1
                 self.itr += 1
         elif self.phase == 1:
             self.rect.centerx += self.xspeed
-            if self.rect.centerx >= 4* hSize//5:
+            if self.rect.centerx >= 4 * hSize // 5:
                 self.phase = 2
                 self.itr += 1
-        elif self.phase ==2:
+        elif self.phase == 2:
             self.rect.centerx -= self.xspeed
-            if self.rect.centerx <= hSize//5:
+            if self.rect.centerx <= hSize // 5:
                 self.phase = 1
                 self.itr += 1
-        elif self.phase ==3:
+        elif self.phase == 3:
             self.rect.centery -= self.yspeed
             self.rect.centerx += 1
 
@@ -315,7 +301,7 @@ class LargePlane(pygame.sprite.Sprite):
         if self.rect.bottom <= 0:
             self.delete(spriteList, shipList)
 
-    def delete(self,spriteList, shipList):
+    def delete(self, spriteList, shipList):
         shipList.remove(self)
         spriteList.remove(self)
 
@@ -330,6 +316,22 @@ class Background(pygame.sprite.Sprite):
         self.xStart, self.yStart = xStart, yStart
 
 
+# https://stackoverflow.com/questions/25221036/pygame-music-pause-unpause-toggle
+# For pausing the music, mostly because it is annoying after .1 seconds.
+# idea is getting the state of the music track (playing or paused) and will either play or pause it depending on
+# whether it's true or false
+class Pause(object):
+    def __init__(self):
+        self.paused = pygame.mixer.music.get_busy()
+
+    def toggle(self):
+        if self.paused:
+            pygame.mixer.music.unpause()
+        if not self.paused:
+            pygame.mixer.music.pause()
+        self.paused = not self.paused
+
+
 # function that will create two small green planes, idea is that two diver planes will spawn, not on top of each other
 # and dive down towards the player there is no collision between planes so overlapping down the same path is very
 # possible
@@ -338,9 +340,9 @@ def makeSmallPlane(image, planeList, all_sprites_list):
     for i in range(0, 2):
         x.append(random.randint(1, 5))
     while x[0] == x[1]:
-        x[1] =  random.randint(1, 5)
-    for i in range(0,2):
-        GS = SmallPlane(image, hSize // x[i], 0, 0, 0, False, False, 0)
+        x[1] = random.randint(1, 5)
+    for i in range(0, 2):
+        GS = SmallPlane(image, hSize // x[i], 0, 0, 0, False, False, 0, 1)
         planeList.append(GS)
         all_sprites_list.add(GS)
 
@@ -351,9 +353,9 @@ def makeSmallPlane(image, planeList, all_sprites_list):
 # to the left or right alternating depending on if alt is negative or positive
 def makeSmallSilver(image, planeList, all_sprites_list):
     global alt
-    alt*=-1
-    x=alt*1
-    GS = SmallPlane(image, hSize // random.randint(1, 5), 0, x, 5, False, False, 0)
+    alt *= -1
+    x = alt * 1
+    GS = SmallPlane(image, hSize // random.randint(1, 5), 0, x, 5, False, False, 0, 1)
     planeList.append(GS)
     all_sprites_list.add(GS)
 
@@ -369,7 +371,7 @@ def makeMediumPlane(image, planeList, all_sprites_list):
 
 # make the large plane and give it health
 def makeLargePlane(image, planeList, all_sprites_list):
-    gl = LargePlane(image,4* hSize//5, vSize + vSize//20, 2, 2, 0, 0, False, 5)
+    gl = LargePlane(image, 4 * hSize // 5, vSize + vSize // 20, 2, 2, 0, 0, False, 5)
     planeList.append(gl)
     all_sprites_list.add(gl)
 
@@ -394,18 +396,15 @@ def calculate(enemyx, enemyy, playerx, playery):
 # all three are stored in an array and called to when they are needed.
 # when a new background is created eg. bgi its y location is on top of the previous background image
 def bgstitch():
-
-    
-    bg = [] # the total "stitched" image
+    bg = []  # the total "stitched" image
 
     # Currently the Three images being used, an Island, the carrier and plain old ocean
     CA = pygame.image.load('CarrierBG.png').convert_alpha()
     OC = pygame.image.load('OceanBG.png').convert_alpha()
     IS = pygame.image.load('IslandBG.png').convert_alpha()
-    
 
     # Coordinates, make things look cleaner
-    x = hSize//2
+    x = hSize // 2
     y = vSize
     # Loop for "creating" the large image. What really is happening here is loading each image into a background sprite
     # class and making the coordinates of them right on top of the other. So in the end all images will look like one
@@ -413,9 +412,9 @@ def bgstitch():
     for i in range(0, 8):
         # Values of i indicate what picture is being used, carrier first and last, two islands, water inbetween
         if i == 0 or i == 6:
-            bg.append(Background(CA, x, y//2-(i*y)))
+            bg.append(Background(CA, x, y // 2 - (i * y)))
         elif i == 1 or i == 3 or i == 5:
-            bg.append(Background(OC, x, y//2-(i*y)))
+            bg.append(Background(OC, x, y // 2 - (i * y)))
         elif i == 2 or i == 4:
             bgi = Background(IS, x, y // 2 - (i * y))
             # To create a little variety, flip the image of one of the islands to make it look "different"
@@ -423,7 +422,7 @@ def bgstitch():
                 bgi.image = pygame.transform.flip(bgi.image, True, False)
             bg.append(bgi)
 
-    return bg  
+    return bg
 
 
 # Taking in the group of background images put together from bgstich\
@@ -445,11 +444,10 @@ def spriteImages():
     greenS = pygame.image.load('SmallGreen.png').convert_alpha()
     silverS = pygame.image.load('SmallSilver.png').convert_alpha()
     greenM = pygame.image.load('MediumGreen.png').convert_alpha()
-    greenL= pygame.image.load('LargeGreen.png').convert_alpha()
-
+    greenL = pygame.image.load('LargeGreen.png').convert_alpha()
 
     logo = pygame.image.load('main.png').convert_alpha()
-    logo = pygame.transform.scale(logo, (3*hSize//4, vSize//5))
+    logo = pygame.transform.scale(logo, (3 * hSize // 4, vSize // 5))
 
     return rocketImg, enemyRocket, player, greenS, silverS, greenM, greenL, logo
 
@@ -457,7 +455,7 @@ def spriteImages():
 # starting menu when game first launched, PAUSE is the object responsible for playing/ pausing "music" on press of m
 # Space bar will start the game by telling gameOn is true
 # two string lines to guide user and of course update the screen to show it
-def mainMenu(logo,PAUSE):
+def mainMenu(logo, PAUSE):
     global gameOn
     while True:
         for event in pygame.event.get():
@@ -471,20 +469,19 @@ def mainMenu(logo,PAUSE):
                     gameOn = True
                     return False
 
-
         text = gameFont.render("Press Return to Begin", True, WHITE, BLACK)
         textRect = text.get_rect()
-        textRect.center= hSize//2,vSize//2
+        textRect.center = hSize // 2, vSize // 2
 
         text2 = gameFont.render("Press M to pause music", True, WHITE, BLACK)
         textRect2 = text2.get_rect()
-        textRect2.center = hSize // 2, vSize // 2 + vSize//20
+        textRect2.center = hSize // 2, vSize // 2 + vSize // 20
 
         window.fill(BLACK)
         window.blit(text, textRect)
         window.blit(text2, textRect2)
 
-        window.blit(logo, (hSize//7, vSize//4))
+        window.blit(logo, (hSize // 7, vSize // 4))
         pygame.display.update()
 
 
@@ -493,17 +490,17 @@ def mainMenu(logo,PAUSE):
 def score(lives):
     global totalScore
     totalScore, lives = str(totalScore), str(lives)
-    text = gameFont.render(""+totalScore+"    "+lives+" UP", True, WHITE)
+    text = gameFont.render("" + totalScore + "    " + lives + " UP", True, WHITE)
     textRect = text.get_rect()
     textRect.left, textRect.top = 50, 20
-    window.blit(text,textRect)
+    window.blit(text, textRect)
     totalScore, lives = int(totalScore), int(lives)
 
 
 # end level stats, specific to that level.
 # will be called on both death and end of level, reset when move to next level
 # Enter will continue game dead determines if player will restart on the same level, or go to next
-def levelstats(PAUSE, background_group, bg, dead):
+def levelStats(PAUSE, background_group, bg, dead):
     text = []
     textRect = []
     global totalScore, fires, hits, misses, destroyed, gameOn, level
@@ -512,12 +509,12 @@ def levelstats(PAUSE, background_group, bg, dead):
     if fires == 0:
         avg = 0
     elif fires is not 0:
-        avg= 100*(hits/fires)
+        avg = 100 * (hits / fires)
 
-    avg= math.floor(avg)  # floor value to get percent
+    avg = math.floor(avg)  # floor value to get percent
 
     totalScore, fires, hits, misses, destroyed, avg = str(totalScore), str(fires), str(hits), str(misses), \
-                                                             str(destroyed), str(avg)
+                                                      str(destroyed), str(avg)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -532,29 +529,29 @@ def levelstats(PAUSE, background_group, bg, dead):
                 if dead == 0:
                     level += 1
                 dead = 0
-                return dead
-            
+                return
+
     if dead == 1:
         text.append(gameFont.render("Ship destroyed Try again?", True, WHITE))
-    
+
     level = str(level)
 
     # Stats
-    text.append(gameFont.render("Level "+level+" Stats", True, WHITE))
-    text.append(gameFont.render("Score         "+totalScore+"", True, WHITE))
-    text.append(gameFont.render("Shots         "+fires+"", True, WHITE))
-    text.append(gameFont.render("Hits          "+hits+"", True, WHITE))
-    text.append(gameFont.render("Misses        "+misses+"", True, WHITE))
-    text.append(gameFont.render("Destroyed     "+destroyed+"", True, WHITE))
-    text.append(gameFont.render("Percent hit   "+avg+"", True, WHITE))
+    text.append(gameFont.render("Level " + level + " Stats", True, WHITE))
+    text.append(gameFont.render("Score         " + totalScore + "", True, WHITE))
+    text.append(gameFont.render("Shots         " + fires + "", True, WHITE))
+    text.append(gameFont.render("Hits          " + hits + "", True, WHITE))
+    text.append(gameFont.render("Misses        " + misses + "", True, WHITE))
+    text.append(gameFont.render("Destroyed     " + destroyed + "", True, WHITE))
+    text.append(gameFont.render("Percent hit   " + avg + "", True, WHITE))
     text.append(gameFont.render("Press Enter to continue", True, WHITE))
 
     # easier to just make an array of all the text lines above
     for i in range(0, len(text)):
         textRect.append(text[i].get_rect())
-        textRect[i].center = hSize // 2, vSize // 2 + i * vSize// 20
+        textRect[i].center = hSize // 2, vSize // 2 + i * vSize // 20
 
-    background_group.draw(window) # Background goes first, not moving but will still be where level ended or death spot
+    background_group.draw(window)  # Background goes first, not moving but will still be where level ended or death spot
 
     for i in range(0, len(text)):
         window.blit(text[i], textRect[i])
@@ -571,9 +568,9 @@ def reset(background_group, bg):
     global fires, hits, misses, destroyed, counter, totalScore
     totalScore, fires, hits, misses, destroyed = int(totalScore), int(fires), int(hits), int(misses), int(destroyed)
 
-    counter, fires, hits, misses, destroyed = 0, 0, 0, 0 ,0
+    counter, fires, hits, misses, destroyed = 0, 0, 0, 0, 0
     background_group.remove(bg)
-    bg = bgstitch() 
+    bg = bgstitch()
     background_group.add(bg)
 
 
@@ -598,247 +595,268 @@ def resetShips(greenList, silverList, mediumList, largeList, spriteList, mrl, lr
         rocket.delete(spriteList, r)
 
 
-# First goal is to clean up main
-# messy function that is in charge of making all ships, rockets, and a bunch of other stuff. too many variables are used
+# determines how often a plane will launch
+def planeSpawn(greenS, greenList,silverS, silverList,greenM ,mediumList, greenL, largeList, all_sprites_list):
+    global counter
+    if counter % 100 == 1 and counter >= 100 and counter <= 2000:
+        greenList, all_sprites_list = makeSmallPlane(greenS, greenList, all_sprites_list)
+    if counter % 60 == 0 and counter >= 100 and counter <= 2000:
+        silverList, all_sprites_list = makeSmallSilver(silverS, silverList, all_sprites_list)
+    if counter == 225 or counter == 725 or counter == 1225:
+        makeMediumPlane(greenM, mediumList, all_sprites_list)
+    if counter == 350 or counter == 1000:
+        makeLargePlane(greenL, largeList, all_sprites_list)
 
+
+#Responsible for creating the rockets from enemyShips
+def planeFire(enemyplane, rocketlist, enemyRocket, all_sprites_list, i):
+    rocket = Enemyrocket(enemyRocket, enemyplane.rect.centerx, enemyplane.rect.centery, 0, 0, i)
+    rocketlist.append(rocket)
+    all_sprites_list.add(rocket)
+    return rocketlist
+
+
+def lgFire(lg, lrl, enemyRocket, all_sprites_list):
+    global counter
+    if counter % 75 == 0 and lg.rect.centery <= vSize // 2:
+        for i in range(1, 4):
+            planeFire(lg, lrl, enemyRocket, all_sprites_list, i)
+
+
+# For getting key presses space and mute
+def gameEvents(ship, rocketImg, r, all_sprites_list):
+    global fires, itr
+    PAUSE = Pause()  # pause/resume music
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_SPACE:  #
+                fires += 1
+                cx, cy = ship.rect.centerx, ship.rect.centery - hSize // 13
+                r.append(Rockets(rocketImg, cx, cy, 8))
+                all_sprites_list.add(r[itr])
+                itr += 1
+            if event.key == pygame.K_m:
+                PAUSE.toggle()
+
+
+
+
+# General Function for detecting collision between planes and user rockets
+def collision(r, enemyplane, enemyplanelist, all_sprites_list, pointsvalue):
+    global hits, destroyed, totalScore
+    for rocket in r:
+        if rocket.collide(enemyplane):
+            enemyplane.health -= 1
+            rocket.delete(r, all_sprites_list)
+            hits += 1
+            if enemyplane.health == 0:
+                destroyed += 1
+                enemyplane.delete(enemyplanelist, all_sprites_list)
+                totalScore += pointsvalue  # points for score
+
+
+# Collision with player plane and enemy plane
+def playerCollision(playerplane, enemyplane):
+    if playerplane.collide(enemyplane):
+        playerplane.livesLeft()
+        enemyplane.health -= 1
+
+
+def greenPlaneFires(gs, ship, enemyRocket, all_sprites_list, srl):
+    global run
+    # Way used to work without dummy, it would fire multiple rockets on retreat due to issues with
+    # calculating x so when dummy is 2 it allows ships to fire only once
+    if run == 2:
+        # dx, dy of rockets
+        x, y = calculate(gs.rect.centerx, gs.rect.centery, ship.rect.centerx, ship.rect.centery)
+        x *= 2
+        y *= 2
+        enrock = Enemyrocket(enemyRocket, gs.rect.centerx, gs.rect.centery, x, y, 0)  # enemy rocket
+        all_sprites_list.add(enrock)
+        srl.append(enrock)
+
+
+def enemyRocketCollision(enemyrocket, enemyrocketlist, ship, all_sprites_list):
+    if enemyrocket.collide(ship):
+        enemyrocket.delete(all_sprites_list, enemyrocketlist)
+        ship.livesLeft()  # decrease ship lives
+
+
+def smallPlaneRockets(srl, all_sprites_list, ship):
+    for sr in srl:
+        sr.slaunch(all_sprites_list, srl)
+        enemyRocketCollision(sr, srl, ship, all_sprites_list)
+
+
+# statements for medium rockets colliding, count is the "identity" for each rocket in the plus shaped launch
+# makes it easier to move specific rockets when another one has been deleted without it, moving rockets was
+# a nightmare with an identity, they will move along a predetermined path.
+def mediumPlaneRockets(mrl, all_sprites_list, ship):
+    for mr in mrl:
+        if mr.count == 1:
+            mr.mlaunch(all_sprites_list, mrl, 4, 0)
+        elif mr.count == 2:
+            mr.mlaunch(all_sprites_list, mrl, -4, 0)
+        elif mr.count == 3:
+            mr.mlaunch(all_sprites_list, mrl, 0, 4)
+        elif mr.count == 4:
+            mr.mlaunch(all_sprites_list, mrl, 0, -4)
+        enemyRocketCollision(mr, mrl, ship, all_sprites_list)
+
+
+def largePlaneRockets(lrl, all_sprites_list, ship):
+    # large rockets, only three, but move in two diagonal and one straight down, if they collide delete it
+    for lr in lrl:
+        if lr.count == 1:
+            lr.mlaunch(all_sprites_list, lrl, 0, 4)
+        elif lr.count == 2:
+            lr.mlaunch(all_sprites_list, lrl, 4, 4)
+        elif lr.count == 3:
+            lr.mlaunch(all_sprites_list, lrl, -4, 4)
+        enemyRocketCollision(lr, lrl, ship, all_sprites_list)
+
+
+def playerDeath(dead, greenList, silverList, mediumList, largeList, all_sprites_list, \
+                mrl, lrl, srl, r, PAUSE, background_group, bg, ship):
+    global gameOn
+    if ship.lives == 0:
+        gameOn = False
+        dead = 1
+        dead = levelStats(PAUSE, background_group, bg, dead)
+        ship.lives = 3
+        resetShips(greenList, silverList, mediumList, largeList, all_sprites_list, mrl, lrl, srl, r)
+    return dead
+
+
+# loop through medium planes alive, fire tells when to launch a missile
+def mediumPlaneListLooping(mediumList, all_sprites_list, enemyRocket, ship, mrl, r):
+    for mg in mediumList:
+        fire = mg.flyGreen()
+        mg.boundry(mediumList, all_sprites_list)
+        if fire:  # Fire four missiles
+            for i in range(1, 5):
+                mrl = planeFire(mg, mrl, enemyRocket, all_sprites_list, i)
+        collision(r, mg, mediumList, all_sprites_list, 500)
+        playerCollision(ship, mg)
+
+
+# loop through large planes,increase hits, score and destroyed too(end level stats)
+def largePlaneListLooping(largeList, all_sprites_list, enemyRocket, ship, lrl, r):
+    for lg in largeList:
+        lg.flyGreen()
+        lg.boundary(largeList, all_sprites_list)
+        collision(r, lg, largeList, all_sprites_list, 1000)
+        lgFire(lg, lrl, enemyRocket, all_sprites_list)
+        playerCollision(ship, lg)
+
+
+# Looping through the small silver plane list
+def smallSilverListLooping(silverList, all_sprites_list, ship, r):
+    for sl in silverList:
+        sl.flySilver()
+        sl.boundary(silverList, all_sprites_list)
+        collision(r, sl, silverList, all_sprites_list, 100)
+        playerCollision(ship, sl)
+
+
+# Small Green planes
+def smallGreenListLooping(greenList, all_sprites_list, enemyRocket, ship, srl, r):
+    global run
+    for gs in greenList:
+        x = math.sqrt(
+            math.pow((ship.rect.centerx - gs.rect.centerx), 2) + math.pow((ship.rect.centery - gs.rect.centery),
+                                                                          2))
+        run = gs.flyGreen(x, ship.rect.centerx, ship.rect.centery)  # dum int used to tell when fire was used
+        gs.boundary(all_sprites_list, greenList)
+        collision(r, gs, greenList, all_sprites_list, 200)
+        greenPlaneFires(gs, ship, enemyRocket, all_sprites_list, srl)
+        playerCollision(ship, gs)
+
+
+# messy function that is in charge of making all ships, rockets, and a bunch of other stuff.
 def main():
-    global itr, run, dummy, alt, gameOn, totalScore, level, fires, hits, misses, destroyed, counter #bunch of globals
+    global itr, run, alt, gameOn, totalScore, level, fires, hits, misses, destroyed, counter  # bunch of globals
     alt = 1
     timer = pygame.time.Clock()
-    dummy = 0
+    run = 0
     r = []  # Rocket list
     srl = []  # small plane  rocket list
     mrl = []  # medium plane rocket list
     lrl = []  # large plane rocket list
-    greenList = []  # Small Green list
-    silverList = []  # silver plane list
-    mediumList = []  # medium green list
-    largeList = []  # large list
-    level, totalScore= 1, 0
+    greenList = []
+    silverList = []
+    mediumList = []
+    largeList = []
+    level, totalScore = 1, 0
     hits, misses, fires, destroyed = 0, 0, 0, 0  # all global to take keep track of stats, will reset every level
-    dead = 0 # alive on 0, dead on 1
+    dead = 0  # alive on 0, dead on 1
     rocketImg, enemyRocket, player, greenS, silverS, greenM, greenL, logo = spriteImages()
-   
 
-    run = False #for rocket launching
     ship = playerPlane(player, hSize // 2, vSize, 0, 0, 3)
 
-    bg = bgstitch() # Call the function to stitch all images together and get the array into bg
-    background_group = pygame.sprite.Group()   # Create another sprite group so no issues with overlapping will happen
-    background_group.add(bg)    # Put background images in the group
+    bg = bgstitch()  # Call the function to stitch all images together and get the array into bg
+    background_group = pygame.sprite.Group()  # Create another sprite group so no issues with overlapping will happen
+    background_group.add(bg)  # Put background images in the group
 
     all_sprites_list = pygame.sprite.Group()
     all_sprites_list.add(ship)
-    counter, itr = 0, 0 # counter is used for telling when certain ships spawn, itr is used to keep track of user rocket
-    pygame.mixer.music.load('intro.wav') # terrible game music but authentic
-    pygame.mixer.music.set_volume(0.2) # quiter
-    PAUSE = Pause() # puase object responsible for pausing/playing game music(should always be off)
+    counter, itr = 0, 0  # Counter- counts length of level, itr- track of user rockets
+    pygame.mixer.music.load('intro.wav')  # terrible game music but authentic
+    pygame.mixer.music.set_volume(0.2)  # quiter
     pygame.mixer.music.play(-1)
-    gameOn = False # off by default wait for mainMenu to set it to true
+    gameOn = False  # off by default wait for mainMenu to set it to true
 
-    mainMenu(logo, PAUSE) # pass in PAUSE to pause music there too
+    PAUSE = Pause()  #Pause music object
+    mainMenu(logo, PAUSE)  # pass in PAUSE to pause music there too
 
-    while True:
+    while True: # outer while loop for when user dies and wants to continue and prevent program closing
         while gameOn:
             timer.tick(60)
             ship.movement()
             ship.boundary()
-            for event in pygame.event.get():
-                # Basic statement, closing program
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                # Statement for launching user missiles, on key release instead of press allows a slightly bigger delay
-                if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_SPACE: #
-                        fires += 1
-                        cx, cy = ship.rect.centerx, ship.rect.centery-hSize//13
-                        r.append(Rockets(rocketImg, cx, cy, 8))
-                        all_sprites_list.add(r[itr])
-                        itr += 1
-                    if event.key == pygame.K_m:
-                        PAUSE.toggle()
 
-            # loop through user rockets launched and call movement function
+            gameEvents(ship, rocketImg, r, all_sprites_list)
+
             for rocket in r:
                 rocket.launch(r, all_sprites_list)
 
-            # determines how often a plane will launch
-            if counter % 100 == 1 and counter >= 100 and counter <= 2000:
-                greenList, all_sprites_list= makeSmallPlane(greenS,greenList, all_sprites_list)
-            if counter % 60 == 0 and counter >= 100 and counter <= 2000:
-                silverList, all_sprites_list = makeSmallSilver(silverS, silverList, all_sprites_list)
-            if counter == 225 or counter == 725 or counter == 1225:
-                makeMediumPlane(greenM, mediumList, all_sprites_list)
-            if counter == 350 or counter == 1000:
-                makeLargePlane(greenL, largeList, all_sprites_list)
+            planeSpawn(greenS, greenList,silverS, silverList,greenM ,mediumList, greenL, largeList, all_sprites_list)
 
-            # loop through medium planes alive, fire tells when to launch a missile as well as calculate
-            # hits, score and destroyed (end level stats)
-            for mg in mediumList:
-                fire = mg.flyGreen()
-                mg.boundry(mediumList, all_sprites_list)
-                # if fire is  True, 4 missiles are launched from plane, move them later down line
-                if fire:
-                    for i in range(1,5):
-                        mr = Enemyrocket(enemyRocket, mg.rect.centerx, mg.rect.centery, 0, 0, i)
-                        mrl.append(mr)
-                        all_sprites_list.add(mr)
-                # loop through user rockets to see in theres collision
-                for rocket in r:
-                    if rocket.collide(mg):
-                        mg.health -= 1
-                        rocket.delete(r, all_sprites_list)
-                        hits+=1
-                        # 3 hits to take down medium planes
-                        if mg.health == 0:
-                            destroyed += 1
-                            mg.delete(mediumList, all_sprites_list)
-                            totalScore += 500 # points for score
-                # if collision take a life off both user and plane. Most times it just results in a end game for user
-                # so don't hit any big ships
-                if ship.collide(mg):
-                    ship.livesLeft() # decrease ship lives
-                    mg.health -= 1
+            # looping through all groups of enemy planes
+            mediumPlaneListLooping(mediumList, all_sprites_list, enemyRocket, ship, mrl, r)
+            largePlaneListLooping(largeList, all_sprites_list, enemyRocket, ship, lrl, r)
+            smallSilverListLooping(silverList, all_sprites_list, ship, r)
+            smallGreenListLooping(greenList, all_sprites_list, enemyRocket, ship, srl, r)
 
-            # loop through large planes, only two spawn at a time so chances of them both alive are slim
-            # but still use a list. increase hits, score and destroyed too(end level stats)
-            for lg in largeList:
-                lg.flyGreen()
-                lg.boundary(largeList, all_sprites_list)
-                # Like before loop through user rockets for collision and deleting health
-                for rocket in r:
-                    if rocket.collide(lg):
-                        lg.health -= 1
-                        rocket.delete(r, all_sprites_list)
-                        hits+=1
-                        if lg.health == 0:
-                            destroyed += 1
-                            lg.delete(largeList, all_sprites_list)
-                            totalScore+= 1000 # points for score
-                # timer used to fire rockets, don't want to shoot them too early, so wait until it is in middle of
-                # screen. after that will fire every 75(not really seconds?) and move them later down line too
-                if counter % 75 == 0 and lg.rect.centery <= vSize//2:
-                    for i in range(1, 4):
-                        lr = Enemyrocket(enemyRocket, lg.rect.centerx, lg.rect.centery, 0, 0, i)
-                        lrl.append(lr)
-                        all_sprites_list.add(lr)
-                if ship.collide(lg):
-                    ship.livesLeft()
-                    lg.health -= 1
+            # enemy rocket collisions
+            smallPlaneRockets(srl, all_sprites_list, ship)
+            mediumPlaneRockets(mrl, all_sprites_list, ship)
+            largePlaneRockets(lrl, all_sprites_list, ship)
 
-            # loop through small silver dive planes, don't shoot so just collide
-            for sl in silverList:
-                sl.flySilver()
-                sl.boundary(silverList, all_sprites_list)
-
-                for rocket in r:
-                    if rocket.collide(sl):
-                        hits += 1
-                        destroyed += 1
-                        rocket.delete(r, all_sprites_list)
-                        sl.delete(silverList, all_sprites_list)
-                        totalScore += 100
-                if ship.collide(sl):
-                    ship.livesLeft() # decrease ship lives
-                    sl.delete(all_sprites_list, silverList)
-
-            # loop through green planes, no collision detection so they can overlap onto other green plane pair
-            for gs in greenList:
-                # distance used to determine when to turn back
-                x = math.sqrt(math.pow((ship.rect.centerx - gs.rect.centerx), 2) + math.pow(( ship.rect.centery - gs.rect.centery), 2))
-                dummy= gs.flyGreen(x, ship.rect.centerx,ship.rect.centery) # dum int used to tell when fire was used
-                gs.boundary(all_sprites_list, greenList)
-                for rocket in r:
-                    if rocket.collide(gs):
-                        hits += 1
-                        destroyed += 1
-                        rocket.delete(r,all_sprites_list)
-                        gs.delete(greenList, all_sprites_list)
-                        totalScore += 200
-                # Way used to work without dummy, it would fire multiple rockets on retreat due to issues with
-                # calculating x so when dummy is 2 it allows ships to fire only once
-                if dummy == 2:
-                    # dx, dy of rockets
-                    x, y = calculate(gs.rect.centerx, gs.rect.centery, ship.rect.centerx, ship.rect.centery)
-                    x *= 2
-                    y *= 2
-                    enrock = Enemyrocket(enemyRocket, gs.rect.centerx, gs.rect.centery, x, y, 0) # enemy rocket
-                    all_sprites_list.add(enrock)
-                    srl.append(enrock)
-                    run = True  # tells when there are rockets to fire, but really probaly don't need it, I'm tired of
-                    # commenting so i'm not going to change it
-                if ship.collide(gs):
-                    ship.livesLeft() # decrease ship lives
-                    gs.delete(all_sprites_list, greenList)
-
-            # statement for small rockets of green small, will move them and does collision
-            if run:
-                for e in srl:
-                    e.slaunch(all_sprites_list, srl)
-                    if e.collide(ship):
-                        e.delete(all_sprites_list, srl)
-                        ship.livesLeft() # decrease ship lives
-
-            # statements for medium rockets colliding, count is the "identity" for each rocket in the plus shaped launch
-            # makes it easier to move specific rockets when another one has been deleted without it, moving rockets was
-            # a nightmare with an identity, they will move along a predetermined path.
-            for mr in mrl:
-                if mr.count == 1:
-                    mr.mlaunch(all_sprites_list,mrl,4, 0)
-                elif mr.count == 2:
-                    mr.mlaunch(all_sprites_list, mrl, -4, 0)
-                elif mr.count == 3:
-                    mr.mlaunch(all_sprites_list, mrl, 0, 4)
-                elif mr.count == 4:
-                    mr.mlaunch(all_sprites_list, mrl, 0, -4)
-                if mr.collide(ship):
-                    mr.delete(all_sprites_list,mrl)
-                    ship.livesLeft() # decrease ship lives
-
-            # large rockets, only three, but move in two diagonal and one straight down, if they collide delete it
-            for lr in lrl:
-                if lr.count == 1:
-                    lr.mlaunch(all_sprites_list, lrl, 0, 4)
-                elif lr.count == 2:
-                    lr.mlaunch(all_sprites_list, lrl, 4,4)
-                elif lr.count == 3:
-                    lr.mlaunch(all_sprites_list, lrl, -4, 4)
-                if lr.collide(ship):
-                    lr.delete(all_sprites_list, lrl)
-                    ship.livesLeft()  # decrease ship lives
-
-            # when counter is smaller than the number below the background continues to move, when it's not, the
-            # level is over so break this loop to get to levelstats screen
-            if counter < vSize*3:
+            #behavior when counter gets to certain value
+            if counter < vSize * 3:
                 background(background_group, 1)
                 counter += 1
-            elif counter >= vSize*2.9:
+            elif counter >= vSize * 2.9:
+                dead = 0
                 gameOn = False
 
-            # Alternatively, player dies, so background still stops, dead is turned on( pretty much a boolean)
-            # display the stats up to death, reset lives, and ships. level stats will reset the game loop
-            if ship.lives==0:
-                gameOn= False
-                dead = 1
-                dead = levelstats(PAUSE, background_group, bg, dead)
-                ship.lives=3
-                resetShips(greenList, silverList, mediumList, largeList, all_sprites_list, mrl, lrl, srl, r)
-
-
+            #check for player health
+            dead = playerDeath(dead, greenList, silverList, mediumList, largeList, all_sprites_list, \
+                        mrl, lrl, srl, r, PAUSE, background_group, bg, ship)
 
             background_group.draw(window)
-            score(ship.lives) # update the score every iteration, ship.lives will be printed
+            score(ship.lives)
             all_sprites_list.draw(window)
             pygame.display.update()
 
-        # statement for when the game loop is over( end of level, or death) will continue until the user wants to
-        # continue (that turns game on to true)
+        # statement for when the game loop is over( end of level, or death)
         while gameOn == False:
-            dead = levelstats(PAUSE, background_group, bg, dead)  # dead is passed returned here to update, and
-                         #displaystats
-            resetShips(greenList, silverList, mediumList, largeList, all_sprites_list, mrl, lrl, srl, r) # reset objects
+            dead = levelStats(PAUSE, background_group, bg, dead)  # dead is passed returned here to update, and
+            resetShips(greenList, silverList, mediumList, largeList, all_sprites_list, mrl, lrl, srl, r)
 
 
 main()
-
