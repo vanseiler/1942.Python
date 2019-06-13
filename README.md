@@ -1,6 +1,6 @@
 # 1942.Python
 
-[a link](http://htmlpreview.github.com/?https://github.com/vanseiler/1942.Python/blob/master/1942/_build/html/index.html)
+[1942 Functions/Classes documentation](http://htmlpreview.github.com/?https://github.com/vanseiler/1942.Python/blob/master/1942/_build/html/index.html)
 
 Recreation of the classic 1942 arcade video game made by Capcom, images and music used are from various versions of 1942 and are property 
 of their own perspective creators.
