@@ -1,4 +1,7 @@
 # 1942.Python
+
+[a link](http://htmlpreview.github.com/?https://github.com/vanseiler/1942.Python/blob/master/1942/_build/html/index.html)
+
 Recreation of the classic 1942 arcade video game made by Capcom, images and music used are from various versions of 1942 and are property 
 of their own perspective creators.
 
@@ -10,7 +13,7 @@ does not have an end to the game except for when user runs out of lives.
 
    ~~Change space bar as continue on death/victory screen~~  
    ~~Clean up main to become easier to read/ debug~~  
-     Implement Sphinx commenting software  
+   ~~Implement Better Commenting~~  
      
   #### Changes planned in the future:
   
