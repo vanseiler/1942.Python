@@ -1,0 +1,55 @@
+****************************
+Classes
+****************************
+
+|
+
+ **playerPlane**
+  .. autoclass:: 1942.playerPlane
+    	:members: 
+
+	.. automethod:: __init__
+
+|
+
+ **Rockets**
+  .. autoclass:: 1942.Rockets
+    	:members:
+
+	.. automethod:: __init__
+
+|
+
+ **SmallPlane**
+  .. autoclass:: 1942.SmallPlane 
+	:members:
+
+	.. automethod:: __init__
+
+|
+
+ **MdiumPlane**
+  .. autoclass:: 1942.MediumPlane
+	:members:
+
+	.. automethod:: __init__
+
+|
+
+ **LargePlane**
+  .. autoclass:: 1942.LargePlane	
+	:members:
+
+	.. automethod:: __init__
+	
+|
+
+ **Background**
+  .. autoclass:: 1942.Background
+ 	:members:
+
+|
+
+ **Pause**
+  .. autoclass:: 1942.Pause
+	:members:

@@ -1,0 +1,15 @@
+.. 1942 documentation master file, created by
+   sphinx-quickstart on Thu Jun 13 00:01:58 2019.
+  
+
+1942 Documentation
+==================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   Functions
+   
+  

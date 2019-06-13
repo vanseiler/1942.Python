@@ -1,0 +1,187 @@
+****************************
+Functions
+****************************
+
+|
+
+**main**
+ .. automodule:: 1942
+	:members: main
+
+|
+
+
+**makeSmallPlane**
+ .. automodule:: 1942
+	:members: makeSmallPlane
+
+|
+
+**makeSmallSilver**
+ .. automodule:: 1942
+	:members: makeSmallSilver
+
+|
+
+**makeMediumPlane**
+ .. automodule:: 1942
+	:members: makeMediumPlane
+
+|
+
+**makeLargePlane**
+ .. automodule:: 1942
+	:members: makeLargePlane
+
+|
+
+**calculate**
+ .. automodule:: 1942
+	:members: calculate
+
+|
+
+**bgstitch**
+ .. automodule:: 1942
+	:members: bgstitch
+
+|
+
+**background**
+ .. automodule:: 1942
+	:members: background
+
+|
+
+**spriteImages**
+ .. automodule:: 1942
+	:members: spriteImages
+
+|
+
+**mainMenu**
+ .. automodule:: 1942
+	:members: mainMenu
+
+|
+
+**score**
+ .. automodule:: 1942
+	:members: score
+
+|
+
+**levelStats**
+ .. automodule:: 1942
+	:members: levelStats
+
+|
+
+**reset**
+ .. automodule:: 1942
+	:members: reset
+
+|
+
+**resestShips**
+ .. automodule:: 1942
+	:members: resetShips
+
+|
+
+**planeSpawn**
+ .. automodule:: 1942
+	:members: planeSpawn
+
+|
+
+**planeFire**
+ .. automodule:: 1942
+	:members: planeFire
+
+|
+
+**lgFire**
+ .. automodule:: 1942
+	:members: lgFire
+
+|
+
+**gameEvents**
+ .. automodule:: 1942
+	:members: gameEvents
+
+|
+
+**collision**
+ .. automodule:: 1942
+	:members: collision
+
+|
+
+**playerCollision**
+ .. automodule:: 1942
+	:members: playerCollision
+
+|
+
+**greenPlaneFires**
+ .. automodule:: 1942
+	:members: greenPlaneFires
+
+|
+
+**enemyRocketCollision**
+ .. automodule:: 1942
+	:members: enemyRocketCollision
+
+|
+
+**smallPlaneRockets**
+ .. automodule:: 1942
+	:members: smallPlaneRockets
+
+|
+
+**mediumPlaneRockets**
+ .. automodule:: 1942
+	:members: mediumPlaneRockets
+
+|
+
+**largePlaneRockets**
+ .. automodule:: 1942
+	:members: largePlaneRockets
+
+|
+
+**playerDeath**
+ .. automodule:: 1942
+	:members: playerDeath
+
+|
+
+**mediumPlaneListLooping**
+ .. automodule:: 1942
+	:members: mediumPlaneListLooping
+
+|
+
+**largePlaneListLooping**
+ .. automodule:: 1942
+	:members: largePlaneListLooping
+
+|
+
+**smallSilverListLooping**
+ .. automodule:: 1942
+	:members: smallSilverListLooping
+
+|
+
+**smallGreenListLooping**
+ .. automodule:: 1942
+	:members: smallGreenListLooping
+
+|
+
