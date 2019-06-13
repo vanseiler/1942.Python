@@ -1,0 +1,791 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Functions &#8212; 1942 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Classes" href="Classes.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>main</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.main">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function responsible for calling functions and Initial declarations of all varaiables, and arrays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alt</strong> – Used to change x direction of small silver plane</p></li>
+<li><p><strong>run</strong> – Tells when a small green ship has a missile alive</p></li>
+<li><p><strong>srl</strong><strong>, </strong><strong>mrl</strong><strong>, </strong><strong>lrl</strong> (<em>r</em><em>,</em>) – Lists for the rocket lists of enemy planes and player</p></li>
+<li><p><strong>silverList</strong><strong>, </strong><strong>mediumList</strong><strong>, </strong><strong>largeList</strong> (<em>greenList</em><em>,</em>) – Lists for enemy planes</p></li>
+<li><p><strong>level</strong> – Tells what level the player is on</p></li>
+<li><p><strong>hits</strong><strong>, </strong><strong>misses</strong><strong>, </strong><strong>fires</strong><strong>, </strong><strong>destroyed</strong> (<em>totalScore</em><em>,</em>) – For keeping stats on players shooting</p></li>
+<li><p><strong>dead</strong> – Tells if the player is dead or alive on level end</p></li>
+<li><p><strong>enemyRocket</strong><strong>, </strong><strong>player</strong><strong>, </strong><strong>greenS</strong><strong>, </strong><strong>silverS</strong><strong>, </strong><strong>greenM</strong><strong>, </strong><strong>greenL</strong><strong>, </strong><strong>logo</strong> (<em>rocketImg</em><em>,</em>) – For sprite images</p></li>
+<li><p><strong>bg</strong> – Background images list</p></li>
+<li><p><strong>counter</strong> – Tells how long the game level has gone on</p></li>
+<li><p><strong>itr</strong> – Keeps track of number of player rockets</p></li>
+<li><p><strong>PAUSE</strong> – Play/pause music of class Pause</p></li>
+<li><p><strong>gameOn</strong> – Bool to tell if the main game loop runs</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>makeSmallPlane</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.makeSmallPlane">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">makeSmallPlane</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">planeList</em>, <em class="sig-param">all_sprites_list</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.makeSmallPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>function that will create two small green planes with random starting x value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – Image for the small plane</p></li>
+<li><p><strong>planeList</strong> – List of small planes it will go into</p></li>
+<li><p><strong>all_sprites_list</strong> – All sprites adding the sprite to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of small green planes, List of all sprites</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>makeSmallSilver</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.makeSmallSilver">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">makeSmallSilver</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">planeList</em>, <em class="sig-param">all_sprites_list</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.makeSmallSilver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that creates small Silver planes with random starting x value and different change in y</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – Image of the silver plane used</p></li>
+<li><p><strong>planeList</strong> – List of all small silver planes</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of all small silver planes, List of all sprites</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>makeMediumPlane</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.makeMediumPlane">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">makeMediumPlane</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">planeList</em>, <em class="sig-param">all_sprites_list</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.makeMediumPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the medium planes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – Image of sprite</p></li>
+<li><p><strong>planeList</strong> – List of medium planes</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>makeLargePlane</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.makeLargePlane">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">makeLargePlane</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">planeList</em>, <em class="sig-param">all_sprites_list</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.makeLargePlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the large planes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – Image of sprite</p></li>
+<li><p><strong>planeList</strong> – List of medium planes</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>calculate</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.calculate">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param">enemyx</em>, <em class="sig-param">enemyy</em>, <em class="sig-param">playerx</em>, <em class="sig-param">playery</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.calculate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines the slope between the player and the enemy and divide the x and y values of the
+slope to get a smaller stepping value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enemyx</strong> – Small Green plane x value</p></li>
+<li><p><strong>enemyy</strong> – Small Green plane y value</p></li>
+<li><p><strong>playerx</strong> – Player x value</p></li>
+<li><p><strong>playery</strong> – Player y value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>New change in x and y for Small Green plane</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>bgstitch</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.bgstitch">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">bgstitch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.bgstitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Stiches” the total image together, works by making sprites of 3 different background images,
+and creates them one on top of another to simulate a large image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Array of images</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>background</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.background">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">background</code><span class="sig-paren">(</span><em class="sig-param">group</em>, <em class="sig-param">speed</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Responsible for moving the background image by shifting the y value of all images by the speed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> – List of all background images</p></li>
+<li><p><strong>speed</strong> – Change in y</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>spriteImages</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.spriteImages">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">spriteImages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.spriteImages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert all sprite images to the proper formatting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>All images</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>mainMenu</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.mainMenu">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">mainMenu</code><span class="sig-paren">(</span><em class="sig-param">logo</em>, <em class="sig-param">PAUSE</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.mainMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starting Splash screen on first launch, event loop for key press and text boxes for options</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logo</strong> – Main logo of 1942</p></li>
+<li><p><strong>PAUSE</strong> – Object of class Pause to stop and play music</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>False to break menu loop</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>score</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.score">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param">lives</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the players score as well as update the amount of lives left in top left screen</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lives</strong> – Player lives left</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>levelStats</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.levelStats">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">levelStats</code><span class="sig-paren">(</span><em class="sig-param">PAUSE</em>, <em class="sig-param">background_group</em>, <em class="sig-param">bg</em>, <em class="sig-param">dead</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.levelStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>End level/ death stats. Allows player to continue to next level or repeat depending on if player is dead or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PAUSE</strong> – Object of class Pause to tell when music to play/stop</p></li>
+<li><p><strong>background_group</strong> – Sprite group of all background sprites (bg)</p></li>
+<li><p><strong>bg</strong> – Array of background images</p></li>
+<li><p><strong>dead</strong> – Bool telling if player is dead or not. Tells when to increase level</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new value of dead</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>reset</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.reset">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param">background_group</em>, <em class="sig-param">bg</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the stat values of the current level as well as delete the old background and make a new one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>background_group</strong> – Sprite list consisting of bg</p></li>
+<li><p><strong>bg</strong> – Array of all background images</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>resestShips</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.resetShips">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">resetShips</code><span class="sig-paren">(</span><em class="sig-param">greenList</em>, <em class="sig-param">silverList</em>, <em class="sig-param">mediumList</em>, <em class="sig-param">largeList</em>, <em class="sig-param">spriteList</em>, <em class="sig-param">mrl</em>, <em class="sig-param">lrl</em>, <em class="sig-param">srl</em>, <em class="sig-param">r</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.resetShips" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all the enemy planes and rockets on call incase of stragglers on level end</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>greenList</strong> – Small green plane list</p></li>
+<li><p><strong>silverList</strong> – Small silver plane list</p></li>
+<li><p><strong>mediumList</strong> – Medium green plane list</p></li>
+<li><p><strong>largeList</strong> – Large green plane list</p></li>
+<li><p><strong>spriteList</strong> – List of all sprites</p></li>
+<li><p><strong>mrl</strong> – Medium rocket list</p></li>
+<li><p><strong>lrl</strong> – Large rocket list</p></li>
+<li><p><strong>srl</strong> – Small rocket list</p></li>
+<li><p><strong>r</strong> – Player rocket list</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>planeSpawn</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.planeSpawn">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">planeSpawn</code><span class="sig-paren">(</span><em class="sig-param">greenS</em>, <em class="sig-param">greenList</em>, <em class="sig-param">silverS</em>, <em class="sig-param">silverList</em>, <em class="sig-param">greenM</em>, <em class="sig-param">mediumList</em>, <em class="sig-param">greenL</em>, <em class="sig-param">largeList</em>, <em class="sig-param">all_sprites_list</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.planeSpawn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines when a plane will spawn in</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>greenS</strong> – Small green plane image</p></li>
+<li><p><strong>greenList</strong> – Small green plane list</p></li>
+<li><p><strong>silverS</strong> – Small silver plane image</p></li>
+<li><p><strong>silverList</strong> – Small silver plane list</p></li>
+<li><p><strong>greenM</strong> – Medium green plane image</p></li>
+<li><p><strong>mediumList</strong> – Medium plane list</p></li>
+<li><p><strong>greenL</strong> – Large green plane image</p></li>
+<li><p><strong>largeList</strong> – Large plane list</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>planeFire</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.planeFire">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">planeFire</code><span class="sig-paren">(</span><em class="sig-param">enemyplane</em>, <em class="sig-param">rocketlist</em>, <em class="sig-param">enemyRocket</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">i</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.planeFire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the enemy plane rockets at function call</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enemyplane</strong> – Enemy plane firing</p></li>
+<li><p><strong>rocketlist</strong> – Enemy rocket list</p></li>
+<li><p><strong>enemyRocket</strong> – Rocket image</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all images</p></li>
+<li><p><strong>i</strong> – ID given to tell how a rocket is moving once launched</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Enemy rocket list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>lgFire</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.lgFire">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">lgFire</code><span class="sig-paren">(</span><em class="sig-param">lg</em>, <em class="sig-param">lrl</em>, <em class="sig-param">enemyRocket</em>, <em class="sig-param">all_sprites_list</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.lgFire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells when to spawn in the rockets for the large plane, calls planeFire</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lg</strong> – Large plane</p></li>
+<li><p><strong>lrl</strong> – Large rocket list</p></li>
+<li><p><strong>enemyRocket</strong> – Enemy rocket image</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>gameEvents</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.gameEvents">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">gameEvents</code><span class="sig-paren">(</span><em class="sig-param">ship</em>, <em class="sig-param">rocketImg</em>, <em class="sig-param">r</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">PAUSE</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.gameEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>For getting the key press during the game</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ship</strong> – Player plane</p></li>
+<li><p><strong>rocketImg</strong> – Player rocket image</p></li>
+<li><p><strong>r</strong> – List of active player rockets</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>collision</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.collision">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">collision</code><span class="sig-paren">(</span><em class="sig-param">r</em>, <em class="sig-param">enemyplane</em>, <em class="sig-param">enemyplanelist</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">pointsvalue</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.collision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Behavior for when a player rocket collides with an enemy plane</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> – List of active player rockets</p></li>
+<li><p><strong>enemyplane</strong> – Object enemy plane</p></li>
+<li><p><strong>enemyplanelist</strong> – List of that type of enemy plane</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>pointsvalue</strong> – Points value for shooting down that plane</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>playerCollision</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.playerCollision">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">playerCollision</code><span class="sig-paren">(</span><em class="sig-param">playerplane</em>, <em class="sig-param">enemyplane</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.playerCollision" title="Permalink to this definition">¶</a></dt>
+<dd><p>For when player collides with an enemy plane</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>playerplane</strong> – Players plane</p></li>
+<li><p><strong>enemyplane</strong> – Enemy plane being checked for collision</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>greenPlaneFires</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.greenPlaneFires">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">greenPlaneFires</code><span class="sig-paren">(</span><em class="sig-param">gs</em>, <em class="sig-param">ship</em>, <em class="sig-param">enemyRocket</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">srl</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.greenPlaneFires" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses var run like a bool value to tell when to fire, on fire move the plane based on the x, y values from calculate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gs</strong> – Green plane</p></li>
+<li><p><strong>ship</strong> – Player plane</p></li>
+<li><p><strong>enemyRocket</strong> – Enemy rocket image</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>srl</strong> – List of all small rockets</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>enemyRocketCollision</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.enemyRocketCollision">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">enemyRocketCollision</code><span class="sig-paren">(</span><em class="sig-param">enemyrocket</em>, <em class="sig-param">enemyrocketlist</em>, <em class="sig-param">ship</em>, <em class="sig-param">all_sprites_list</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.enemyRocketCollision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks for collision between player ship and enemy rockets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enemyrocket</strong> – Rocket of enemy ship</p></li>
+<li><p><strong>enemyrocketlist</strong> – List of enemy rockets</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>smallPlaneRockets</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.smallPlaneRockets">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">smallPlaneRockets</code><span class="sig-paren">(</span><em class="sig-param">srl</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">ship</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.smallPlaneRockets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop through all the active small plane rockets and check for collision with player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>srl</strong> – Small rocket list</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>mediumPlaneRockets</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.mediumPlaneRockets">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">mediumPlaneRockets</code><span class="sig-paren">(</span><em class="sig-param">mrl</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">ship</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.mediumPlaneRockets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop through all active medium plane rockets and move them based on their identity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mrl</strong> – Medium rocket list</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>largePlaneRockets</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.largePlaneRockets">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">largePlaneRockets</code><span class="sig-paren">(</span><em class="sig-param">lrl</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">ship</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.largePlaneRockets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop through all active large plane rockets and move them based off identity as well</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lrl</strong> – Large rocket list</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>playerDeath</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.playerDeath">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">playerDeath</code><span class="sig-paren">(</span><em class="sig-param">dead</em>, <em class="sig-param">greenList</em>, <em class="sig-param">silverList</em>, <em class="sig-param">mediumList</em>, <em class="sig-param">largeList</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">mrl</em>, <em class="sig-param">lrl</em>, <em class="sig-param">srl</em>, <em class="sig-param">r</em>, <em class="sig-param">PAUSE</em>, <em class="sig-param">background_group</em>, <em class="sig-param">bg</em>, <em class="sig-param">ship</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.playerDeath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines what happens on player death, parameters also include the parameters for resetShips</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dead</strong> – Tell if the player is dead or not</p></li>
+<li><p><strong>PAUSE</strong> – Object of pause to stop/play music</p></li>
+<li><p><strong>background_group</strong> – Group of background sprites</p></li>
+<li><p><strong>bg</strong> – Array of background images</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whether player is dead or not</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>mediumPlaneListLooping</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.mediumPlaneListLooping">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">mediumPlaneListLooping</code><span class="sig-paren">(</span><em class="sig-param">mediumList</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">enemyRocket</em>, <em class="sig-param">ship</em>, <em class="sig-param">mrl</em>, <em class="sig-param">r</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.mediumPlaneListLooping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop through all alive medium planes, and fire missiles at certain times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mediumList</strong> – List of medium planes</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>enemyRocket</strong> – Enemy rocket image</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+<li><p><strong>mrl</strong> – Medium rocket list</p></li>
+<li><p><strong>r</strong> – Active player rocket list</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>largePlaneListLooping</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.largePlaneListLooping">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">largePlaneListLooping</code><span class="sig-paren">(</span><em class="sig-param">largeList</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">enemyRocket</em>, <em class="sig-param">ship</em>, <em class="sig-param">lrl</em>, <em class="sig-param">r</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.largePlaneListLooping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop through all alive large planes, call function to check when to fire</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>largeList</strong> – List of all large planes</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>enemyRocket</strong> – Enemy rocket image</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+<li><p><strong>lrl</strong> – Large rocket list</p></li>
+<li><p><strong>r</strong> – Active player rockets list</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>smallSilverListLooping</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.smallSilverListLooping">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">smallSilverListLooping</code><span class="sig-paren">(</span><em class="sig-param">silverList</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">ship</em>, <em class="sig-param">r</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.smallSilverListLooping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop through all alive small silver planes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>silverList</strong> – List of all alive small silver planes</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+<li><p><strong>r</strong> – Active player rockets list</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl>
+<dt><strong>smallGreenListLooping</strong></dt><dd><span class="target" id="module-1942"></span><dl class="function">
+<dt id="1942.smallGreenListLooping">
+<code class="sig-prename descclassname">1942.</code><code class="sig-name descname">smallGreenListLooping</code><span class="sig-paren">(</span><em class="sig-param">greenList</em>, <em class="sig-param">all_sprites_list</em>, <em class="sig-param">enemyRocket</em>, <em class="sig-param">ship</em>, <em class="sig-param">srl</em>, <em class="sig-param">r</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.smallGreenListLooping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop through all alive small green planes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>greenList</strong> – List of all alive small green planes</p></li>
+<li><p><strong>all_sprites_list</strong> – List of all sprites</p></li>
+<li><p><strong>enemyRocket</strong> – Enemy rocket image</p></li>
+<li><p><strong>ship</strong> – Player ship</p></li>
+<li><p><strong>srl</strong> – Small rocket list</p></li>
+<li><p><strong>r</strong> – Active player rockets list</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">1942</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Classes.html">Classes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Classes.html" title="previous chapter">Classes</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Van Seiler.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Functions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

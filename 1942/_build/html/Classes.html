@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Classes &#8212; 1942 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Functions" href="Functions.html" />
+    <link rel="prev" title="1942 Documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="classes">
+<h1>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><dl>
+<dt><strong>playerPlane</strong></dt><dd><dl class="class">
+<dt id="1942.playerPlane">
+<em class="property">class </em><code class="sig-prename descclassname">1942.</code><code class="sig-name descname">playerPlane</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">xspeed</em>, <em class="sig-param">yspeed</em>, <em class="sig-param">lives</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.playerPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Player plane class, defines behavior of player plane</p>
+<dl class="method">
+<dt id="1942.playerPlane.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">xspeed</em>, <em class="sig-param">yspeed</em>, <em class="sig-param">lives</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.playerPlane.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for creating player plane sprite</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imgFile</strong> – Image of the players plane</p></li>
+<li><p><strong>xStart</strong> – Starting x value</p></li>
+<li><p><strong>yStart</strong> – Starting y value</p></li>
+<li><p><strong>xspeed</strong> – Change in x</p></li>
+<li><p><strong>yspeed</strong> – Change in y</p></li>
+<li><p><strong>lives</strong> – Lives ship has before it is destroyed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.playerPlane.boundary">
+<code class="sig-name descname">boundary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.playerPlane.boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prevents user from leaving screen</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.playerPlane.collide">
+<code class="sig-name descname">collide</code><span class="sig-paren">(</span><em class="sig-param">object</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.playerPlane.collide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for collision between user and enemy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>object</strong> – Plane or rocket to check collision</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Collision has happened</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.playerPlane.livesLeft">
+<code class="sig-name descname">livesLeft</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.playerPlane.livesLeft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrease user lives on call</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.playerPlane.movement">
+<code class="sig-name descname">movement</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.playerPlane.movement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get user input and determine where to move</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><dl>
+<dt><strong>Rockets</strong></dt><dd><dl class="class">
+<dt id="1942.Rockets">
+<em class="property">class </em><code class="sig-prename descclassname">1942.</code><code class="sig-name descname">Rockets</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">yspeed</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.Rockets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines behavior for all player rockets</p>
+<dl class="method">
+<dt id="1942.Rockets.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">yspeed</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.Rockets.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the Rocket sprite</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>imgFile</strong> – Rocket image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.Rockets.collide">
+<code class="sig-name descname">collide</code><span class="sig-paren">(</span><em class="sig-param">object</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.Rockets.collide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detect collision between rocket and some other plane</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>object</strong> – Enemy plane</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Collision has happened</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.Rockets.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">spriteList</em>, <em class="sig-param">rocketlist</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.Rockets.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the rocket from spritelist and rocket list when called</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spriteList</strong> – List of all sprites</p></li>
+<li><p><strong>rocketlist</strong> – List of active player rockets</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.Rockets.launch">
+<code class="sig-name descname">launch</code><span class="sig-paren">(</span><em class="sig-param">rocketlist</em>, <em class="sig-param">spriteList</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.Rockets.launch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines behavior of each rocket launched by player as well as tell when the
+player has missed and rocket goes off screen</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rocketlist</strong> – List of all active player rockets</p></li>
+<li><p><strong>spriteList</strong> – List of all sprites on screen</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><dl>
+<dt><strong>SmallPlane</strong></dt><dd><dl class="class">
+<dt id="1942.SmallPlane">
+<em class="property">class </em><code class="sig-prename descclassname">1942.</code><code class="sig-name descname">SmallPlane</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">xspeed</em>, <em class="sig-param">yspeed</em>, <em class="sig-param">retreat</em>, <em class="sig-param">fire</em>, <em class="sig-param">dummy</em>, <em class="sig-param">health</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.SmallPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines behavior for the small green plane and small silver</p>
+<dl class="method">
+<dt id="1942.SmallPlane.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">xspeed</em>, <em class="sig-param">yspeed</em>, <em class="sig-param">retreat</em>, <em class="sig-param">fire</em>, <em class="sig-param">dummy</em>, <em class="sig-param">health</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.SmallPlane.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for small planes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>retreat</strong> – Bool value to tell when the small green plane turns around or not</p></li>
+<li><p><strong>fire</strong> – Bool value to tell when the ship is firing</p></li>
+<li><p><strong>dummy</strong> – Dumb variable used to tell when enemy rockets from small green are alive</p></li>
+<li><p><strong>health</strong> – Plane health, when 0 indicates its destroyed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.SmallPlane.boundary">
+<code class="sig-name descname">boundary</code><span class="sig-paren">(</span><em class="sig-param">spritelist</em>, <em class="sig-param">shiplist</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.SmallPlane.boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for both silver and green, tells when the ship has left the screen</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spritelist</strong> – Sprites list</p></li>
+<li><p><strong>shiplist</strong> – List of all enemy planes</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.SmallPlane.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">shiplist</em>, <em class="sig-param">spriteList</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.SmallPlane.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the enemy plane on call</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shiplist</strong> – List of all enemy planes</p></li>
+<li><p><strong>spriteList</strong> – Sprites list</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.SmallPlane.flyGreen">
+<code class="sig-name descname">flyGreen</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">sx</em>, <em class="sig-param">sy</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.SmallPlane.flyGreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the plane in the direction of the player, not perfect</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Distance from player to enemy plane will ship when to turn around</p></li>
+<li><p><strong>sx</strong> – Player plane x location</p></li>
+<li><p><strong>sy</strong> – Player plane y location</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dummy used to indicate Green plane fires</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.SmallPlane.flySilver">
+<code class="sig-name descname">flySilver</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.SmallPlane.flySilver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Small silver plane moves linearly so only change x and y based on it’s speed</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><dl>
+<dt><strong>MdiumPlane</strong></dt><dd><dl class="class">
+<dt id="1942.MediumPlane">
+<em class="property">class </em><code class="sig-prename descclassname">1942.</code><code class="sig-name descname">MediumPlane</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">xspeed</em>, <em class="sig-param">yspeed</em>, <em class="sig-param">phase</em>, <em class="sig-param">itr</em>, <em class="sig-param">fire</em>, <em class="sig-param">health</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.MediumPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines behavior for the medium planes</p>
+<dl class="method">
+<dt id="1942.MediumPlane.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">xspeed</em>, <em class="sig-param">yspeed</em>, <em class="sig-param">phase</em>, <em class="sig-param">itr</em>, <em class="sig-param">fire</em>, <em class="sig-param">health</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.MediumPlane.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for Medium Planes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – For telling what phase the plane is on in its flight path</p></li>
+<li><p><strong>itr</strong> – Keep track of how many phases its gone through</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.MediumPlane.boundry">
+<code class="sig-name descname">boundry</code><span class="sig-paren">(</span><em class="sig-param">spritelist</em>, <em class="sig-param">shiplist</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.MediumPlane.boundry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines the boundry for the plane. Flies on determined path so only check when plane leaves top of screen</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spritelist</strong> – Sprite list</p></li>
+<li><p><strong>shiplist</strong> – List of medium planes</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.MediumPlane.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">spriteList</em>, <em class="sig-param">shiplist</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.MediumPlane.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the plane from both spriteList and list of medium planes
+:param spriteList: Spirte list
+:param shiplist: List of medium planes
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.MediumPlane.flyGreen">
+<code class="sig-name descname">flyGreen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.MediumPlane.flyGreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flight path for the Medium planes in phases</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Bool value to tell when to fire</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><dl>
+<dt><strong>LargePlane</strong></dt><dd><dl class="class">
+<dt id="1942.LargePlane">
+<em class="property">class </em><code class="sig-prename descclassname">1942.</code><code class="sig-name descname">LargePlane</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">xspeed</em>, <em class="sig-param">yspeed</em>, <em class="sig-param">phase</em>, <em class="sig-param">itr</em>, <em class="sig-param">fire</em>, <em class="sig-param">health</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.LargePlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines behavior for the large planes</p>
+<dl class="method">
+<dt id="1942.LargePlane.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em>, <em class="sig-param">xspeed</em>, <em class="sig-param">yspeed</em>, <em class="sig-param">phase</em>, <em class="sig-param">itr</em>, <em class="sig-param">fire</em>, <em class="sig-param">health</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.LargePlane.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for Large planes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phase</strong> – For telling what phase the plane is on in its flight path</p></li>
+<li><p><strong>itr</strong> – Keep track of how many phases its gone through</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.LargePlane.boundary">
+<code class="sig-name descname">boundary</code><span class="sig-paren">(</span><em class="sig-param">shipList</em>, <em class="sig-param">spriteList</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.LargePlane.boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets boundary for medium planes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shipList</strong> – Medium plane list</p></li>
+<li><p><strong>spriteList</strong> – List of sprites</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.LargePlane.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">spriteList</em>, <em class="sig-param">shipList</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.LargePlane.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete plane from lists when it is called
+:param spriteList: Sprite list
+:param shipList: Medium plane list
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="1942.LargePlane.flyGreen">
+<code class="sig-name descname">flyGreen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.LargePlane.flyGreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Behavior similar to medium planes but different path</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><dl>
+<dt><strong>Background</strong></dt><dd><dl class="class">
+<dt id="1942.Background">
+<em class="property">class </em><code class="sig-prename descclassname">1942.</code><code class="sig-name descname">Background</code><span class="sig-paren">(</span><em class="sig-param">imgFile</em>, <em class="sig-param">xStart</em>, <em class="sig-param">yStart</em><span class="sig-paren">)</span><a class="headerlink" href="#1942.Background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the sprites for each background image given a specific starting point</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><dl>
+<dt><strong>Pause</strong></dt><dd><dl class="class">
+<dt id="1942.Pause">
+<em class="property">class </em><code class="sig-prename descclassname">1942.</code><code class="sig-name descname">Pause</code><a class="headerlink" href="#1942.Pause" title="Permalink to this definition">¶</a></dt>
+<dd><p>Taken from here-
+<a class="reference external" href="https://stackoverflow.com/questions/25221036/pygame-music-pause-unpause-toggle">https://stackoverflow.com/questions/25221036/pygame-music-pause-unpause-toggle</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>object</strong> – Object that belongs to class Pause</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="1942.Pause.toggle">
+<code class="sig-name descname">toggle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#1942.Pause.toggle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the value of paused to true or false depending on whether music is playing or not</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">1942</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Functions.html">Functions</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">1942 Documentation</a></li>
+      <li>Next: <a href="Functions.html" title="next chapter">Functions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Van Seiler.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Classes.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
